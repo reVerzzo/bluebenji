@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benji's Lab - Tienda de Ropa</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* DEFINICIÓN DE COLORES EXACTOS DE TU MARCA */
+        :root {
+            --bg-main: #0F0F0F;
+            --text-main: #F5F5F5;
+            --card-bg: #2E2E2E;
+            --btn-primary: #76FF03;
+            --btn-secondary: #00AEEF;
+            --badge-noti: #FF3C00;
+            --border-purple: #9400D3;
+            --border-yellow: #FFD700;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: Arial, sans-serif;
+        }
+
+        /* ESTILOS PERSONALIZADOS SOBRE BOOTSTRAP */
+        .navbar {
+            background-color: var(--bg-main);
+            /* ELIMINAMOS EL border-bottom PARA QUE NO HAYA DIVISIÓN VISIBLE */
+        }
+
+        .navbar-brand {
+            font-family: 'Impact', sans-serif;
+            color: var(--text-main) !important;
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--text-main) !important;
+            font-weight: bold;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--btn-primary) !important;
+        }
+
+        /* Color de la burbuja de notificación usando Bootstrap positioning */
+        .bg-noti {
+            background-color: var(--badge-noti) !important;
+            font-size: 10px;
+        }
+
+        /* HERO - Imagen que ocupa el 100% de la pantalla */
+        .hero-image-placeholder {
+            width: 100%;
+            height: 80vh;
+            background-color: #1a1a1a; 
+            /* background-image: url('tu-imagen-aqui.jpg'); */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* TARJETAS DE PRODUCTO */
+        .custom-card {
+            background-color: var(--card-bg);
+            border-width: 2px;
+            border-style: solid;
+            border-radius: 10px;
+        }
+        
+        .border-purple { border-color: var(--border-purple) !important; }
+        .border-yellow { border-color: var(--border-yellow) !important; }
+
+        .product-placeholder {
+            width: 100%;
+            height: 250px;
+            background-color: #444; 
+            border-radius: 8px;
+        }
+
+        .btn-custom-blue {
+            background-color: var(--btn-secondary);
+            color: var(--text-main);
+            font-weight: bold;
+            border: none;
+        }
+
+        .btn-custom-blue:hover {
+            opacity: 0.8;
+            color: var(--text-main);
+        }
+
+        footer {
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg py-3 sticky-top">
+        <div class="container-fluid px-4">
+            
+            <a class="navbar-brand" href="index.html">BENJI'S LAB</a>
+            
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavegacion">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="menuNavegacion">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">INICIO</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tienda">TIENDA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#drops">NUEVOS DROPS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">CONTACTO</a></li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="#carrito">
+                            <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-noti">
+                                2
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#buscar">
+                            <i class="fas fa-search" style="font-size: 18px; color: var(--btn-primary);"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="container-fluid p-0">
+        <div class="hero-image-placeholder"></div>
+    </header>
+
+    <main class="container py-5 my-4">
+        <h2 class="text-center text-uppercase mb-5">Los Destacados de la Semana</h2>
+        
+        <div class="row g-4">
+            
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card custom-card border-purple h-100 p-3 text-white">
+                    <div class="product-placeholder mb-3"></div>
+                    <h5 class="card-title fs-6">Camiseta Bugs Bunny Cruz Roja</h5>
+                    <p class="card-text mb-4">$35</p>
+                    <a href="#comprar" class="btn btn-custom-blue w-100 mt-auto">AÑADIR AL CARRITO</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card custom-card border-yellow h-100 p-3 text-white">
+                    <div class="product-placeholder mb-3"></div>
+                    <h5 class="card-title fs-6">Camiseta Pangea Mix M&Ms</h5>
+                    <p class="card-text mb-4">$35</p>
+                    <a href="#comprar" class="btn btn-custom-blue w-100 mt-auto">AÑADIR AL CARRITO</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card custom-card border-yellow h-100 p-3 text-white">
+                    <div class="product-placeholder mb-3"></div>
+                    <h5 class="card-title fs-6">Gorra Green Face Blanco</h5>
+                    <p class="card-text mb-4">$25</p>
+                    <a href="#comprar" class="btn btn-custom-blue w-100 mt-auto">AÑADIR AL CARRITO</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card custom-card border-purple h-100 p-3 text-white">
+                    <div class="product-placeholder mb-3"></div>
+                    <h5 class="card-title fs-6">Sudadera Pink Lady Sniffing</h5>
+                    <p class="card-text mb-4">$55</p>
+                    <a href="#comprar" class="btn btn-custom-blue w-100 mt-auto">AÑADIR AL CARRITO</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-4 mt-5 text-center">
+        <p class="mb-0">&copy; 2026 Benji's Lab. Urban & Aerógrafo. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
