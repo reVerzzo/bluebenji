@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         track.innerHTML = productos
             .map(
                 (p) => `
-            <a href="producto.html?id=${p.id}"
+            <a href="pantallas_html/producto.html?id=${p.id}"
                class="shrink-0 w-52 bg-brand-card rounded-xl p-3 border-2 border-transparent transition">
                 <div class="w-full h-44 rounded-lg bg-white bg-contain bg-center bg-no-repeat mb-3"
                      style="background-image:url('${p.image}')"></div>

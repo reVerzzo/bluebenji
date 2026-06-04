@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         elTitulo.textContent = producto.title;
         elPrecio.textContent = window.Utils.precio(producto.price);
         elDescripcion.textContent = producto.description;
-        if (producto.rating) {
+        if (elRating && producto.rating) {
             elRating.textContent = `${producto.rating.rate} / 5 (${producto.rating.count} reseñas)`;
         }
         document.title = `${producto.title} - Benji's Lab`;
@@ -84,13 +84,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // --- Favoritos ---
     const btnFav = document.getElementById("btnFavorito");
-    btnFav.addEventListener("click", () => {
-        const activo = btnFav.classList.toggle("text-brand-noti");
-        btnFav.classList.toggle("border-brand-noti", activo);
-        const icono = btnFav.querySelector("i");
-        icono.classList.toggle("fas", activo);
-        icono.classList.toggle("far", !activo);
-    });
+    if (btnFav) {
+        btnFav.addEventListener("click", () => {
+            const activo = btnFav.classList.toggle("text-brand-noti");
+            btnFav.classList.toggle("border-brand-noti", activo);
+            const icono = btnFav.querySelector("i");
+            icono.classList.toggle("fas", activo);
+            icono.classList.toggle("far", !activo);
+        });
+    }
 
     // --- Añadir al carrito (exige talla) ---
     function intentarAgregar() {
