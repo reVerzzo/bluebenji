@@ -2,24 +2,9 @@
 /*
 utils.js
 Descripción: Funciones auxiliares para procesar los datos y formatear información
-Autor: Santiago Colín
-Fecha: 13/05/26
 
 */
 
-
-// Validar el email
-function validarEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-}
-
-// Calcular envío basado en monto
-const calculateShipping = (orderAmount) => {
-  if (orderAmount > 100) return 0; // envío gratis
-  if (orderAmount > 50) return 5; // 
-  return 10;
-};
 
 // Calcular impuestos
 const calculateTax = (price, taxRate = 0.16) => price * taxRate;
