@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benji's Lab - Tienda de Ropa Urbana</title>
+    <title>Tienda - Benji's Lab</title>
 
-    <!-- Tailwind (Play CDN) + configuración de marca -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/tw-config.js"></script>
-    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-brand-bg text-brand-text font-sans">
@@ -17,15 +15,11 @@
     <header class="sticky top-0 z-40 bg-brand-bg/95 backdrop-blur border-b border-white/5">
         <nav class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
             <a href="index.html" class="font-brand text-2xl tracking-wide shrink-0">BENJI'S LAB</a>
-
-            <!-- Enlaces (se colapsan en móvil) -->
             <div id="navMenu" class="hidden md:flex md:items-center gap-6 absolute md:static top-full left-0 right-0 bg-brand-bg md:bg-transparent border-b border-white/10 md:border-0 px-4 md:px-0 py-3 md:py-0 flex-col md:flex-row">
                 <a href="index.html" class="font-bold text-sm hover:text-brand-green">INICIO</a>
-                <a href="tienda.html" class="font-bold text-sm hover:text-brand-green">TIENDA</a>
+                <a href="tienda.html" class="font-bold text-sm text-brand-green">TIENDA</a>
                 <a href="index.html#drops" class="font-bold text-sm hover:text-brand-green">NUEVOS DROPS</a>
             </div>
-
-            <!-- Iconos siempre visibles -->
             <div class="flex items-center gap-4 shrink-0">
                 <a href="tienda.html" class="hover:opacity-80" aria-label="Buscar"><i class="fas fa-search text-brand-green"></i></a>
                 <button data-cart-open class="relative hover:opacity-80" aria-label="Carrito">
@@ -37,31 +31,48 @@
         </nav>
     </header>
 
-    <!-- ===== HERO (imagen de fondo) ===== -->
-    <section id="inicio" class="relative min-h-[88vh] flex items-center justify-center text-center">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('images/inicio.jpg')"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-brand-bg"></div>
-        <div class="relative z-10 px-5 max-w-3xl">
-            <span class="inline-block bg-brand-green text-brand-bg font-bold text-xs tracking-widest uppercase px-4 py-1.5 rounded-full mb-5">Nueva colección · Aerógrafo Urbano</span>
-            <h1 class="font-brand uppercase tracking-wide leading-none text-5xl sm:text-6xl md:text-7xl mb-6">
-                Viste el <span class="text-brand-green">arte</span><br>de la calle
-            </h1>
-            <a href="tienda.html" class="inline-block bg-brand-green text-brand-bg font-bold uppercase tracking-wide px-9 py-4 rounded-lg hover:-translate-y-0.5 transition">Comprar ahora</a>
-        </div>
-    </section>
+    <main class="max-w-7xl mx-auto px-4 py-10">
+        <h1 class="font-brand uppercase text-4xl tracking-wide mb-2">Tienda</h1>
+        <p class="text-white/60 mb-8">Todas las prendas disponibles. Filtra por categoría y precio.</p>
 
-    <!-- ===== NUEVOS DROPS (carrusel) ===== -->
-    <section id="drops" class="max-w-7xl mx-auto px-4 py-16">
-        <h2 class="text-center uppercase font-brand text-3xl tracking-wide mb-8">Nuevos Drops</h2>
-        <div class="flex items-center gap-3">
-            <button id="carruselPrev" class="shrink-0 w-11 h-11 rounded-full bg-brand-green text-brand-bg text-lg font-bold hover:opacity-80" aria-label="Anterior">&#10094;</button>
-            <div id="carruselTrack" class="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar py-2"></div>
-            <button id="carruselNext" class="shrink-0 w-11 h-11 rounded-full bg-brand-green text-brand-bg text-lg font-bold hover:opacity-80" aria-label="Siguiente">&#10095;</button>
-        </div>
-    </section>
+        <div class="grid md:grid-cols-[260px_1fr] gap-8">
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="border-t border-white/10 py-8 text-center text-white/60 text-sm">
+            <!-- ===== FILTROS ===== -->
+            <aside class="bg-brand-card rounded-xl p-5 h-max md:sticky md:top-24">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="font-bold text-lg">Filtros</h2>
+                    <button id="limpiarFiltros" class="text-xs text-brand-green hover:underline">Limpiar</button>
+                </div>
+
+                <!-- Buscar -->
+                <label class="block text-sm font-semibold mb-1">Buscar</label>
+                <input id="filtroBuscar" type="search" placeholder="Nombre de la prenda..."
+                       class="w-full bg-brand-bg border border-white/15 rounded-lg px-3 py-2 text-sm mb-5 focus:outline-none focus:border-brand-green">
+
+                <!-- Categorías -->
+                <p class="text-sm font-semibold mb-2">Categorías</p>
+                <div id="filtroCategorias" class="space-y-2 mb-5 text-sm text-white/80">
+                    <p class="text-white/40">Cargando...</p>
+                </div>
+
+                <!-- Precio -->
+                <p class="text-sm font-semibold mb-2">Precio</p>
+                <p class="text-sm text-white/70 mb-2">$<span id="precioMinVal">0</span> &ndash; $<span id="precioMaxVal">0</span></p>
+                <input id="precioMin" type="range" class="w-full accent-brand-green mb-1">
+                <input id="precioMax" type="range" class="w-full accent-brand-green">
+            </aside>
+
+            <!-- ===== GRID DE PRODUCTOS ===== -->
+            <section>
+                <p id="contadorResultados" class="text-sm text-white/50 mb-4"></p>
+                <div id="gridTienda" class="grid grid-cols-2 lg:grid-cols-3 gap-5">
+                    <p class="text-white/50 col-span-full">Cargando productos...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/10 py-8 text-center text-white/60 text-sm mt-10">
         <p class="mb-1"><a href="mailto:contacto@benjislab.com" class="hover:text-brand-green">contacto@benjislab.com</a></p>
         <p>&copy; 2026 Benji's Lab. Urban &amp; Aerógrafo. Todos los derechos reservados.</p>
     </footer>
@@ -90,6 +101,6 @@
     <script src="js/utils.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/carrito.js"></script>
-    <script src="js/inicio.js"></script>
+    <script src="js/tienda.js"></script>
 </body>
 </html>
