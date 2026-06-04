@@ -1,0 +1,133 @@
+/* ============================================================
+   styles.css — Estilos generales de BlueBenji (Benji's Lab)
+   Responsable: Uriel — Estilos base del sitio
+   Depende de: variables.css
+   ============================================================ */
+
+/* ---------- Reset ligero ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-base);
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ---------- Tipografía ---------- */
+h1, h2, h3, h4, h5 {
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.5px;
+}
+
+.brand {
+    font-family: var(--font-brand);
+    font-size: var(--fs-xl);
+    letter-spacing: 1px;
+    color: var(--text-main);
+}
+
+.section-title {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: var(--space-lg);
+}
+
+.text-muted-soft {
+    color: var(--text-muted);
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+    background-color: var(--bg-main);
+}
+
+.nav-link {
+    color: var(--text-main) !important;
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-sm);
+    transition: color var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--btn-primary) !important;
+}
+
+.bg-noti {
+    background-color: var(--badge-noti) !important;
+    font-size: var(--fs-xs);
+}
+
+/* ---------- Hero / imagen destacada ---------- */
+.hero-image-placeholder {
+    width: 100%;
+    height: 80vh;
+    background-color: var(--bg-soft);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* ---------- Tarjetas de producto ---------- */
+.custom-card {
+    background-color: var(--card-bg);
+    border-width: 2px;
+    border-style: solid;
+    border-radius: var(--radius);
+    transition: transform var(--transition);
+}
+
+.custom-card:hover {
+    transform: translateY(-4px);
+}
+
+.border-purple { border-color: var(--border-purple) !important; }
+.border-yellow { border-color: var(--border-yellow) !important; }
+
+.product-placeholder {
+    width: 100%;
+    height: 250px;
+    background-color: #444;
+    border-radius: var(--radius-sm);
+}
+
+/* ---------- Botones ---------- */
+.btn-custom-green {
+    background-color: var(--btn-primary);
+    color: var(--bg-main);
+    font-weight: var(--fw-bold);
+    border: none;
+}
+
+.btn-custom-blue {
+    background-color: var(--btn-secondary);
+    color: var(--text-main);
+    font-weight: var(--fw-bold);
+    border: none;
+}
+
+.btn-custom-blue:hover,
+.btn-custom-green:hover {
+    opacity: 0.85;
+    color: inherit;
+}
+
+/* ---------- Footer ---------- */
+footer {
+    border-top: 1px solid var(--border-soft);
+    color: var(--text-muted);
+}
