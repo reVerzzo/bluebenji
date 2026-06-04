@@ -33,8 +33,7 @@
 
     <main class="max-w-7xl mx-auto px-4 py-10">
         <h1 class="font-brand uppercase text-4xl tracking-wide mb-2">Tienda</h1>
-        <p class="text-white/60 mb-8">Todas las prendas disponibles. Filtra por categoría y precio.</p>
-
+        <br>
         <div class="grid md:grid-cols-[260px_1fr] gap-8">
 
             <!-- ===== FILTROS ===== -->
@@ -44,18 +43,18 @@
                     <button id="limpiarFiltros" class="text-xs text-brand-green hover:underline">Limpiar</button>
                 </div>
 
-                <!-- Buscar -->
+              
                 <label class="block text-sm font-semibold mb-1">Buscar</label>
                 <input id="filtroBuscar" type="search" placeholder="Nombre de la prenda..."
                        class="w-full bg-brand-bg border border-white/15 rounded-lg px-3 py-2 text-sm mb-5 focus:outline-none focus:border-brand-green">
 
-                <!-- Categorías -->
+            
                 <p class="text-sm font-semibold mb-2">Categorías</p>
                 <div id="filtroCategorias" class="space-y-2 mb-5 text-sm text-white/80">
                     <p class="text-white/40">Cargando...</p>
                 </div>
 
-                <!-- Precio -->
+            
                 <p class="text-sm font-semibold mb-2">Precio</p>
                 <p class="text-sm text-white/70 mb-2">$<span id="precioMinVal">0</span> &ndash; $<span id="precioMaxVal">0</span></p>
                 <input id="precioMin" type="range" class="w-full accent-brand-green mb-1">
@@ -74,7 +73,7 @@
 
     <footer class="border-t border-white/10 py-8 text-center text-white/60 text-sm mt-10">
         <p class="mb-1"><a href="mailto:contacto@benjislab.com" class="hover:text-brand-green">contacto@benjislab.com</a></p>
-        <p>&copy; 2026 Benji's Lab. Urban &amp; Aerógrafo. Todos los derechos reservados.</p>
+        <p>&copy; 2026 Benji's Lab. Urban &amp; Todos los derechos reservados.</p>
     </footer>
 
     <!-- ===== CARRITO (drawer, compartido) ===== -->

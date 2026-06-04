@@ -1,7 +1,7 @@
-// utils.js - Funciones auxiliares para formatear datos y filtrar productos
-// Expone window.Utils. Usa window.Config para las etiquetas de categoría.
+
 window.Utils = {
-    // Formatear un precio: 12.5 -> "$12.50"
+    
+
     precio(n) {
         return "$" + Number(n || 0).toFixed(2);
     },

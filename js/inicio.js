@@ -1,13 +1,13 @@
-// inicio.js - Carrusel "Nuevos Drops" de la portada
-// Responsable: Santiago (Colin)
+
+// inicio.js - Carrusel 
+
 // Los productos se obtienen de la FakeStore API (https://fakestoreapi.com).
+
 document.addEventListener("DOMContentLoaded", async () => {
     const track = document.getElementById("carruselTrack");
     const btnPrev = document.getElementById("carruselPrev");
     const btnNext = document.getElementById("carruselNext");
     if (!track) return;
-
-    const bordes = ["border-brand-purple", "border-brand-gold"];
 
     try {
         // Se cachea la respuesta de la API para no volver a pedirla en cada visita
@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         track.innerHTML = productos
             .map(
-                (p, i) => `
+                (p) => `
             <a href="producto.html?id=${p.id}"
-               class="shrink-0 w-52 bg-brand-card rounded-xl p-3 border-2 ${bordes[i % bordes.length]} hover:border-brand-green transition">
+               class="shrink-0 w-52 bg-brand-card rounded-xl p-3 border-2 border-transparent transition">
                 <div class="w-full h-44 rounded-lg bg-white bg-contain bg-center bg-no-repeat mb-3"
                      style="background-image:url('${p.image}')"></div>
                 <h3 class="text-sm font-semibold truncate">${p.title}</h3>
@@ -44,13 +44,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     btnNext.addEventListener("click", () => track.scrollBy({ left: paso, behavior: "smooth" }));
     btnPrev.addEventListener("click", () => track.scrollBy({ left: -paso, behavior: "smooth" }));
 
-    // Auto-desplazamiento (vuelve al inicio al llegar al final)
-    setInterval(() => {
-        const finReal = track.scrollWidth - track.clientWidth - 5;
-        if (track.scrollLeft >= finReal) {
-            track.scrollTo({ left: 0, behavior: "smooth" });
-        } else {
-            track.scrollBy({ left: paso, behavior: "smooth" });
-        }
-    }, 3000);
+    
 });

@@ -1,5 +1,6 @@
-// nav.js - Comportamiento del navbar (menú hamburguesa en móvil)
-// Compartido por todas las páginas.
+// nav.js - Comportamiento del navbar
+
+// Esto se comparte en todas las pantallas
 document.addEventListener("DOMContentLoaded", () => {
     const toggle = document.getElementById("navToggle");
     const menu = document.getElementById("navMenu");
