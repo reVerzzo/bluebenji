@@ -82,7 +82,18 @@
         .product-placeholder {
             width: 100%;
             height: 250px;
-            background-color: #444; 
+            background-color: #444;
+            border-radius: 8px;
+        }
+
+        /* Imagen de producto traída desde la API (foto sobre fondo blanco) */
+        .product-img {
+            width: 100%;
+            height: 250px;
+            background-color: #fff;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
             border-radius: 8px;
         }
 
@@ -101,6 +112,60 @@
         footer {
             border-top: 1px solid #333;
         }
+
+        /* CARRUSEL DE PRODUCTOS TOP */
+        .carrusel-top {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .carrusel-track {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px 4px;
+            scrollbar-width: none;
+        }
+
+        .carrusel-track::-webkit-scrollbar { display: none; }
+
+        .carrusel-item {
+            flex: 0 0 220px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 14px;
+            border: 2px solid var(--border-purple);
+        }
+
+        .carrusel-item .carrusel-img {
+            width: 100%;
+            height: 180px;
+            background-color: #fff;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .carrusel-btn {
+            flex: 0 0 auto;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            background-color: var(--btn-primary);
+            color: var(--bg-main);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .carrusel-btn:hover { opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -122,10 +187,10 @@
                     <li class="nav-item"><a class="nav-link" href="#contacto">CONTACTO</a></li>
                     
                     <li class="nav-item">
-                        <a class="nav-link position-relative" href="#carrito">
+                        <a class="nav-link position-relative" href="#carrito" role="button" data-bs-toggle="offcanvas" data-bs-target="#carritoPanel">
                             <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-noti">
-                                2
+                            <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-noti">
+                                0
                             </span>
                         </a>
                     </li>
@@ -147,51 +212,45 @@
     <main class="container py-5 my-4">
         <h2 class="text-center text-uppercase mb-5">Los Destacados de la Semana</h2>
         
-        <div class="row g-4">
-            
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card custom-card border-purple h-100 p-3 text-white">
-                    <div class="product-placeholder mb-3"></div>
-                    <h5 class="card-title fs-6">Camiseta Bugs Bunny Cruz Roja</h5>
-                    <p class="card-text mb-4">$35</p>
-                    <a href="#comprar" class="btn btn-custom-blue w-100 mt-auto">AÑADIR AL CARRITO</a>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card custom-card border-yellow h-100 p-3 text-white">
-                    <div class="product-placeholder mb-3"></div>
-                    <h5 class="card-title fs-6">Camiseta Pangea Mix M&Ms</h5>
-                    <p class="card-text mb-4">$35</p>
-                    <a href="#comprar" class="btn btn-custom-blue w-100 mt-auto">AÑADIR AL CARRITO</a>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card custom-card border-yellow h-100 p-3 text-white">
-                    <div class="product-placeholder mb-3"></div>
-                    <h5 class="card-title fs-6">Gorra Green Face Blanco</h5>
-                    <p class="card-text mb-4">$25</p>
-                    <a href="#comprar" class="btn btn-custom-blue w-100 mt-auto">AÑADIR AL CARRITO</a>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card custom-card border-purple h-100 p-3 text-white">
-                    <div class="product-placeholder mb-3"></div>
-                    <h5 class="card-title fs-6">Sudadera Pink Lady Sniffing</h5>
-                    <p class="card-text mb-4">$55</p>
-                    <a href="#comprar" class="btn btn-custom-blue w-100 mt-auto">AÑADIR AL CARRITO</a>
-                </div>
-            </div>
-
+        <!-- Las tarjetas se cargan dinámicamente desde la FakeStore API (js/productos.js) -->
+        <div class="row g-4" id="gridDestacados">
+            <p class="text-center text-secondary">Cargando productos...</p>
         </div>
     </main>
+
+    <section class="container py-5" id="drops">
+        <h2 class="text-center text-uppercase mb-4">Productos Top</h2>
+        <div class="carrusel-top">
+            <button class="carrusel-btn" id="carruselPrev" aria-label="Anterior">&#10094;</button>
+            <div class="carrusel-track" id="carruselTrack"></div>
+            <button class="carrusel-btn" id="carruselNext" aria-label="Siguiente">&#10095;</button>
+        </div>
+    </section>
 
     <footer class="py-4 mt-5 text-center">
         <p class="mb-0">&copy; 2026 Benji's Lab. Urban & Aerógrafo. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- Carrito de compras (panel lateral) -->
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="carritoPanel" aria-labelledby="carritoTitulo">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="carritoTitulo">Tu carrito</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-unstyled" id="carritoItems"></ul>
+            <hr>
+            <div class="d-flex justify-content-between mb-3">
+                <strong>Total:</strong>
+                <strong id="carritoTotal">$0</strong>
+            </div>
+            <a href="#comprar" class="btn btn-custom-blue w-100">Finalizar compra</a>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/productos.js"></script>
+    <script src="js/carrusel.js"></script>
+    <script src="js/carrito.js"></script>
 </body>
 </html>
