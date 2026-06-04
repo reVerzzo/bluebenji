@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago - Benji's Lab</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/tw-config.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-brand-bg text-brand-text font-sans">
+
+    <!-- ===== NAVBAR (compartido) ===== -->
+    <header class="sticky top-0 z-40 bg-brand-bg/95 backdrop-blur border-b border-white/5">
+        <nav class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <a href="index.html" class="font-brand text-2xl tracking-wide shrink-0">BENJI'S LAB</a>
+            <div id="navMenu" class="hidden md:flex md:items-center gap-6 absolute md:static top-full left-0 right-0 bg-brand-bg md:bg-transparent border-b border-white/10 md:border-0 px-4 md:px-0 py-3 md:py-0 flex-col md:flex-row">
+                <a href="index.html" class="font-bold text-sm hover:text-brand-green">INICIO</a>
+                <a href="tienda.html" class="font-bold text-sm hover:text-brand-green">TIENDA</a>
+                <a href="index.html#drops" class="font-bold text-sm hover:text-brand-green">NUEVOS DROPS</a>
+            </div>
+            <div class="flex items-center gap-4 shrink-0">
+                <a href="tienda.html" class="hover:opacity-80" aria-label="Buscar"><i class="fas fa-search text-brand-green"></i></a>
+                <button data-cart-open class="relative hover:opacity-80" aria-label="Carrito">
+                    <i class="fas fa-shopping-cart text-lg"></i>
+                    <span id="cartCount" class="hidden absolute -top-2 -right-2 bg-brand-noti text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">0</span>
+                </button>
+                <button id="navToggle" class="md:hidden text-xl" aria-label="Menú"><i class="fas fa-bars"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10">
+        <h1 class="font-brand uppercase text-4xl tracking-wide mb-8">Finalizar compra</h1>
+
+        <!-- ===== VISTA DE CHECKOUT ===== -->
+        <div id="vistaCheckout" class="grid lg:grid-cols-[1fr_360px] gap-8 items-start">
+
+            <!-- Formulario de pago -->
+            <form id="formPago" novalidate class="bg-brand-card rounded-xl p-6 space-y-6">
+                <div>
+                    <h2 class="font-bold text-lg mb-4">Datos de envío</h2>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <input id="nombre" type="text" placeholder="Nombre completo" required
+                               class="bg-brand-bg border border-white/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-green">
+                        <input id="email" type="email" placeholder="Correo electrónico" required
+                               class="bg-brand-bg border border-white/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-green">
+                        <input id="direccion" type="text" placeholder="Dirección" required
+                               class="bg-brand-bg border border-white/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-green sm:col-span-2">
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="font-bold text-lg mb-4">Método de pago</h2>
+                    <div class="grid sm:grid-cols-3 gap-3" id="metodos">
+                        <label class="metodo-card flex items-center gap-2 bg-brand-bg border-2 border-brand-green rounded-lg px-3 py-2.5 cursor-pointer text-sm">
+                            <input type="radio" name="metodo" value="tarjeta" class="accent-brand-green" checked>
+                            <i class="fas fa-credit-card"></i> Tarjeta
+                        </label>
+                        <label class="metodo-card flex items-center gap-2 bg-brand-bg border-2 border-white/15 rounded-lg px-3 py-2.5 cursor-pointer text-sm">
+                            <input type="radio" name="metodo" value="paypal" class="accent-brand-green">
+                            <i class="fab fa-paypal"></i> PayPal
+                        </label>
+                        <label class="metodo-card flex items-center gap-2 bg-brand-bg border-2 border-white/15 rounded-lg px-3 py-2.5 cursor-pointer text-sm">
+                            <input type="radio" name="metodo" value="efectivo" class="accent-brand-green">
+                            <i class="fas fa-money-bill-wave"></i> Efectivo
+                        </label>
+                    </div>
+
+                    <!-- Campos de tarjeta -->
+                    <div id="camposTarjeta" class="grid sm:grid-cols-2 gap-4 mt-4">
+                        <input id="tarjeta" type="text" inputmode="numeric" placeholder="Número de tarjeta"
+                               class="bg-brand-bg border border-white/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-green sm:col-span-2">
+                        <input id="venc" type="text" placeholder="MM/AA"
+                               class="bg-brand-bg border border-white/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-green">
+                        <input id="cvv" type="text" inputmode="numeric" placeholder="CVV"
+                               class="bg-brand-bg border border-white/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-green">
+                    </div>
+                </div>
+
+                <p id="errorPago" class="text-sm text-brand-noti"></p>
+                <button id="btnPagar" type="submit"
+                        class="w-full bg-brand-green text-brand-bg font-bold uppercase tracking-wide py-3.5 rounded-lg hover:opacity-90">
+                    Pagar
+                </button>
+            </form>
+
+            <!-- Resumen del pedido -->
+            <aside class="bg-brand-card rounded-xl p-6 lg:sticky lg:top-24">
+                <h2 class="font-bold text-lg mb-4">Tu pedido</h2>
+                <ul id="resumenItems" class="space-y-3 mb-4"></ul>
+                <div class="border-t border-white/10 pt-4 space-y-1 text-sm">
+                    <div class="flex justify-between text-white/70"><span>Subtotal</span><span id="resumenSubtotal">$0</span></div>
+                    <div class="flex justify-between text-white/70"><span>Envío</span><span id="resumenEnvio">Gratis</span></div>
+                    <div class="flex justify-between font-bold text-lg pt-2"><span>Total</span><span id="resumenTotal" class="text-brand-green">$0</span></div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- ===== VISTA DE ÉXITO ===== -->
+        <div id="vistaExito" class="hidden text-center py-20">
+            <i class="fas fa-circle-check text-brand-green text-6xl mb-5"></i>
+            <h2 class="text-3xl font-bold mb-3">¡Pago realizado con éxito!</h2>
+            <p class="text-white/70 mb-2">Gracias por tu compra en Benji's Lab.</p>
+            <p class="text-white/50 mb-8">Tu pedido <span id="numeroPedido" class="text-brand-green font-bold"></span> está en preparación.</p>
+            <a href="index.html" class="inline-block bg-brand-green text-brand-bg font-bold uppercase px-8 py-3.5 rounded-lg hover:opacity-90">Volver al inicio</a>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/10 py-8 text-center text-white/60 text-sm mt-10">
+        <p class="mb-1"><a href="mailto:contacto@benjislab.com" class="hover:text-brand-green">contacto@benjislab.com</a></p>
+        <p>&copy; 2026 Benji's Lab. Urban &amp; Aerógrafo. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- ===== CARRITO (drawer, compartido) ===== -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
+        <div data-cart-close class="absolute inset-0 bg-black/60"></div>
+        <aside id="cartPanel" class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-brand-card flex flex-col shadow-2xl translate-x-full transition-transform duration-300">
+            <div class="flex items-center justify-between p-4 border-b border-white/10">
+                <h2 class="font-bold text-lg">Tu carrito</h2>
+                <button data-cart-close class="text-2xl leading-none hover:text-brand-green" aria-label="Cerrar">&times;</button>
+            </div>
+            <ul id="carritoItems" class="flex-1 overflow-y-auto p-4 space-y-3"></ul>
+            <div class="p-4 border-t border-white/10">
+                <div class="flex justify-between mb-3">
+                    <span class="font-bold">Total:</span>
+                    <span id="carritoTotal" class="font-bold text-brand-green">$0</span>
+                </div>
+                <a href="pago.html" class="block text-center bg-brand-blue font-bold py-3 rounded-lg hover:opacity-90">Finalizar compra</a>
+            </div>
+        </aside>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/cache.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/pago.js"></script>
+</body>
+</html>
