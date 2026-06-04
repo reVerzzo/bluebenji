@@ -1,4 +1,4 @@
-# Boceto y wireframe — BlueBenji (Benji's Lab)
+# Boceto y wireframe-BlueBenji (Benji's Lab)
 
 Responsable: **Uriel** · Actividad: *Boceto y diseño de la interfaz (wireframe)*
 
