@@ -1,31 +1,30 @@
+// utils.js - Funciones auxiliares para formatear datos y filtrar productos
+// Expone window.Utils. Usa window.Config para las etiquetas de categoría.
+window.Utils = {
+    // Formatear un precio: 12.5 -> "$12.50"
+    precio(n) {
+        return "$" + Number(n || 0).toFixed(2);
+    },
 
-/*
-utils.js
-Descripción: Funciones auxiliares para procesar los datos y formatear información
+    // Etiqueta en español de una categoría de la API
+    categoria(cat) {
+        return (window.Config?.CATEGORIAS || {})[cat] || cat;
+    },
 
-*/
+    // Quedarse solo con las prendas de ropa de la API
+    soloRopa(productos) {
+        return productos.filter((p) => p.category && p.category.includes("clothing"));
+    },
 
-
-// Calcular impuestos
-const calculateTax = (price, taxRate = 0.16) => price * taxRate;
-
-
-// Filtrar productos por categoría, precio, talla
-const filterProducts = (products, filters) => {
-  return products.filter(p => 
-    (!filters.category || p.category === filters.category) &&
-    (!filters.minPrice || p.price >= filters.minPrice) &&
-    (!filters.maxPrice || p.price <= filters.maxPrice) &&
-    (!filters.size || p.sizes.includes(filters.size))
-  );
+    // Filtrar productos por texto, categorías y rango de precio
+    filtrar(productos, { texto = "", categorias = null, min = -Infinity, max = Infinity }) {
+        const q = texto.trim().toLowerCase();
+        return productos.filter(
+            (p) =>
+                p.title.toLowerCase().includes(q) &&
+                (!categorias || categorias.includes(p.category)) &&
+                p.price >= min &&
+                p.price <= max
+        );
+    },
 };
-
-// Buscar productos por nombre o descripción
-const searchProducts = (products, query) => {
-  const q = query.toLowerCase();
-  return products.filter(p => 
-    p.name.toLowerCase().includes(q) || 
-    p.description.toLowerCase().includes(q)
-  );
-};
-
