@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - Benji's Lab</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tw-config.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-brand-bg text-brand-text font-sans">
+
+    <!-- ===== NAVBAR (compartido) ===== -->
+    <header class="sticky top-0 z-40 bg-brand-bg/95 backdrop-blur border-b border-white/5">
+        <nav class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <a href="../index.html" class="font-brand text-2xl tracking-wide shrink-0">BENJI'S LAB</a>
+            <div id="navMenu" class="hidden md:flex md:items-center gap-6 absolute md:static top-full left-0 right-0 bg-brand-bg md:bg-transparent border-b border-white/10 md:border-0 px-4 md:px-0 py-3 md:py-0 flex-col md:flex-row">
+                <a href="../index.html" class="font-bold text-sm hover:text-brand-green">INICIO</a>
+                <a href="tienda.html" class="font-bold text-sm text-brand-green">TIENDA</a>
+                <a href="../index.html#drops" class="font-bold text-sm hover:text-brand-green">NUEVOS DROPS</a>
+            </div>
+            <div class="flex items-center gap-4 shrink-0">
+                <a href="tienda.html" class="hover:opacity-80" aria-label="Buscar"><i class="fas fa-search text-brand-green"></i></a>
+                <button data-cart-open class="relative hover:opacity-80" aria-label="Carrito">
+                    <i class="fas fa-shopping-cart text-lg"></i>
+                    <span id="cartCount" class="hidden absolute -top-2 -right-2 bg-brand-noti text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">0</span>
+                </button>
+                <button id="navToggle" class="md:hidden text-xl" aria-label="Menú"><i class="fas fa-bars"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10">
+        <h1 class="font-brand uppercase text-4xl tracking-wide mb-2">Tienda</h1>
+        <br>
+        <div class="grid md:grid-cols-[260px_1fr] gap-8">
+
+            <!-- ===== FILTROS ===== -->
+            <aside class="bg-brand-card rounded-xl p-5 h-max md:sticky md:top-24">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="font-bold text-lg">Filtros</h2>
+                    <button id="limpiarFiltros" class="text-xs text-brand-green hover:underline">Limpiar</button>
+                </div>
+
+              
+                <label class="block text-sm font-semibold mb-1">Buscar</label>
+                <input id="filtroBuscar" type="search" placeholder="Nombre de la prenda..."
+                       class="w-full bg-brand-bg border border-white/15 rounded-lg px-3 py-2 text-sm mb-5 focus:outline-none focus:border-brand-green">
+
+            
+                <p class="text-sm font-semibold mb-2">Categorías</p>
+                <div id="filtroCategorias" class="space-y-2 mb-5 text-sm text-white/80">
+                    <p class="text-white/40">Cargando...</p>
+                </div>
+
+            
+                <p class="text-sm font-semibold mb-2">Precio</p>
+                <p class="text-sm text-white/70 mb-2">$<span id="precioMinVal">0</span> &ndash; $<span id="precioMaxVal">0</span></p>
+                <input id="precioMin" type="range" class="w-full accent-brand-green mb-1">
+                <input id="precioMax" type="range" class="w-full accent-brand-green">
+            </aside>
+
+            <!-- ===== GRID DE PRODUCTOS ===== -->
+            <section>
+                <p id="contadorResultados" class="text-sm text-white/50 mb-4"></p>
+                <div id="gridTienda" class="grid grid-cols-2 lg:grid-cols-3 gap-5">
+                    <p class="text-white/50 col-span-full">Cargando productos...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/10 py-8 text-center text-white/60 text-sm mt-10">
+        <p class="mb-1"><a href="mailto:contacto@benjislab.com" class="hover:text-brand-green">contacto@benjislab.com</a></p>
+        <p>&copy; 2026 Benji's Lab. Urban &amp; Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- ===== CARRITO (drawer, compartido) ===== -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
+        <div data-cart-close class="absolute inset-0 bg-black/60"></div>
+        <aside id="cartPanel" class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-brand-card flex flex-col shadow-2xl translate-x-full transition-transform duration-300">
+            <div class="flex items-center justify-between p-4 border-b border-white/10">
+                <h2 class="font-bold text-lg">Tu carrito</h2>
+                <button data-cart-close class="text-2xl leading-none hover:text-brand-green" aria-label="Cerrar">&times;</button>
+            </div>
+            <ul id="carritoItems" class="flex-1 overflow-y-auto p-4 space-y-3"></ul>
+            <div class="p-4 border-t border-white/10">
+                <div class="flex justify-between mb-3">
+                    <span class="font-bold">Total:</span>
+                    <span id="carritoTotal" class="font-bold text-brand-green">$0</span>
+                </div>
+                <a href="pago.html" class="block text-center bg-brand-blue font-bold py-3 rounded-lg hover:opacity-90">Finalizar compra</a>
+            </div>
+        </aside>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/cache.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/nav.js"></script>
+    <script src="../js/carrito.js"></script>
+    <script src="../js/tienda.js"></script>
+</body>
+</html>

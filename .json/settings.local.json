@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout *)",
+      "Bash(git merge *)",
+      "Bash(git ls-tree *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git pull *)",
+      "Bash(cp ~/Downloads/IMG_9049.jpg images/inicio.jpg && ls -la images/ && echo \"Imagen copiada como images/inicio.jpg\")",
+      "Bash(command -v python3)",
+      "Bash(echo \"python3: $\\(command -v python3 || echo NO\\)\")",
+      "Bash(command -v python)",
+      "Bash(echo \"python: $\\(command -v python || echo NO\\)\")",
+      "Read(//private/tmp/**)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(awk '{print $2, $11, $12, $13}')",
+      "Bash(git fetch *)",
+      "Bash(git rev-list *)",
+      "Bash(git push *)"
+    ]
+  }
+}

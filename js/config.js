@@ -1,10 +1,23 @@
-// config.js - cargar los archivos JSON en el navegador
-var configData;
+// config.js - Carga de configuración central de la app
 
-fetch('./config.json')
-  .then(response => response.json())
-  .then(data => {
-    configData = data;
-    console.log(data);
-  })
-  .catch(error => console.error('Error:', error));
+window.Config = {
+    
+    API_URL: "https://fakestoreapi.com",
+
+    
+    CATEGORIAS: {
+        "men's clothing": "Hombre",
+        "women's clothing": "Mujer",
+    },
+
+    // Producto de muestra por defecto
+    ID_DEFAULT: 2,
+
+    TALLAS: ["S", "M", "L", "XL"],
+
+    CARRITO_KEY: "bluebenji_carrito",
+    ENVIO: 0, // envío gratis
+
+    CACHE_KEY: "bluebenji_productos",
+    CACHE_MIN: 10,
+};
