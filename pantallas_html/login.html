@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Producto - Benji's Lab</title>
+    <title>Iniciar sesión - Benji's Lab</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../js/tw-config.js"></script>
@@ -32,53 +32,34 @@
         </nav>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-10">
-        <a href="tienda.html" class="text-sm text-white/60 hover:text-brand-green">&larr; Volver a la tienda</a>
-
-        <div class="grid lg:grid-cols-2 gap-10 mt-4">
-
-            <!-- Columna: imagen principal y miniaturas -->
-            <div>
-                <div id="imagenPrincipal" class="w-full h-[460px] rounded-xl border-2 border-brand-purple bg-white bg-contain bg-center bg-no-repeat"></div>
-                <div id="miniaturas" class="flex gap-3 mt-4"></div>
+    <main class="max-w-md mx-auto px-4 py-16">
+        <div class="bg-brand-card rounded-xl p-8">
+            <div class="text-center mb-6">
+                <i class="fas fa-user-lock text-brand-green text-4xl mb-3"></i>
+                <h1 class="font-brand uppercase text-3xl tracking-wide">Iniciar sesión</h1>
+                <p class="text-white/50 text-sm mt-1">Acceso al panel de administración</p>
             </div>
 
-            <!-- Columna: información de venta (se rellena desde la API) -->
-            <div>
-                <p id="prodCategoria" class="uppercase text-sm text-white/50 mb-1">Cargando&hellip;</p>
-                <h1 id="prodTitulo" class="text-3xl font-bold mb-3">Cargando producto&hellip;</h1>
-                <p id="prodPrecio" class="text-brand-green text-3xl font-bold mb-4"></p>
-                <p id="prodDescripcion" class="text-white/80 mb-4 leading-relaxed"></p>
-
-
-                <!-- Tallas -->
-                <p class="font-bold mb-2">Talla</p>
-                <div id="tallas" class="flex gap-2.5 mb-6">
-                    <button class="talla-btn w-12 h-12 rounded-lg border-2 border-white/30 font-bold hover:border-brand-green" data-talla="S">S</button>
-                    <button class="talla-btn w-12 h-12 rounded-lg border-2 border-white/30 font-bold hover:border-brand-green" data-talla="M">M</button>
-                    <button class="talla-btn w-12 h-12 rounded-lg border-2 border-white/30 font-bold hover:border-brand-green" data-talla="L">L</button>
-                    <button class="talla-btn w-12 h-12 rounded-lg border-2 border-white/30 font-bold hover:border-brand-green" data-talla="XL">XL</button>
+            <form id="formLogin" novalidate class="space-y-4">
+                <div>
+                    <label for="usuario" class="block text-sm font-semibold mb-1">Usuario</label>
+                    <input id="usuario" type="text" autocomplete="username" placeholder="Usuario"
+                           class="w-full bg-brand-bg border border-white/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-green">
                 </div>
-
-                <!--agregar -->
-                <div class="flex gap-3 items-stretch">
-                    
-                    <button id="btnAgregar" class="flex-1 bg-brand-blue text-brand-text font-bold uppercase py-3.5 rounded-lg hover:opacity-90">
-                        Agregar al carrito
-                    </button>
+                <div>
+                    <label for="clave" class="block text-sm font-semibold mb-1">Contraseña</label>
+                    <input id="clave" type="password" autocomplete="current-password" placeholder="Contraseña"
+                           class="w-full bg-brand-bg border border-white/15 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-green">
                 </div>
-                <a id="btnComprarYa" href="pago.html" class="block text-center mt-3 bg-brand-green text-brand-bg font-bold uppercase py-3.5 rounded-lg hover:opacity-90">
-                    Comprar ahora
-                </a>
-                <p id="avisoTalla" class="text-sm mt-3"></p>
-            </div>
+                <p id="errorLogin" class="text-sm text-brand-noti"></p>
+                <button type="submit" class="w-full bg-brand-green text-brand-bg font-bold uppercase tracking-wide py-3 rounded-lg hover:opacity-90">
+                    Entrar
+                </button>
+            </form>
+
+            <a href="../index.html" class="block text-center text-sm text-white/50 hover:text-brand-green mt-5">&larr; Volver al inicio</a>
         </div>
     </main>
-
-    <footer class="border-t border-white/10 py-8 text-center text-white/60 text-sm mt-10">
-        <p class="mb-1"><a href="mailto:contacto@benjislab.com" class="hover:text-brand-green">contacto@benjislab.com</a></p>
-        <p>&copy; 2026 Benji's Lab. Urban &amp; Aerógrafo. Todos los derechos reservados.</p>
-    </footer>
 
     <!-- ===== CARRITO (drawer, compartido) ===== -->
     <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
@@ -105,6 +86,6 @@
     <script src="../js/nav.js"></script>
     <script src="../js/carrito.js"></script>
     <script src="../js/auth.js"></script>
-    <script src="../js/producto.js"></script>
+    <script src="../js/login.js"></script>
 </body>
 </html>

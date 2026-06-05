@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Producto - Benji's Lab</title>
+    <title>Panel de administración - Benji's Lab</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../js/tw-config.js"></script>
@@ -33,45 +33,38 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-4 py-10">
-        <a href="tienda.html" class="text-sm text-white/60 hover:text-brand-green">&larr; Volver a la tienda</a>
 
-        <div class="grid lg:grid-cols-2 gap-10 mt-4">
-
-            <!-- Columna: imagen principal y miniaturas -->
+        <!-- Encabezado del panel -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
             <div>
-                <div id="imagenPrincipal" class="w-full h-[460px] rounded-xl border-2 border-brand-purple bg-white bg-contain bg-center bg-no-repeat"></div>
-                <div id="miniaturas" class="flex gap-3 mt-4"></div>
+                <h1 class="font-brand uppercase text-4xl tracking-wide">Panel de administración</h1>
+                <p class="text-white/50 text-sm mt-1">Estadísticas de ventas de Benji's Lab</p>
             </div>
-
-            <!-- Columna: información de venta (se rellena desde la API) -->
-            <div>
-                <p id="prodCategoria" class="uppercase text-sm text-white/50 mb-1">Cargando&hellip;</p>
-                <h1 id="prodTitulo" class="text-3xl font-bold mb-3">Cargando producto&hellip;</h1>
-                <p id="prodPrecio" class="text-brand-green text-3xl font-bold mb-4"></p>
-                <p id="prodDescripcion" class="text-white/80 mb-4 leading-relaxed"></p>
-
-
-                <!-- Tallas -->
-                <p class="font-bold mb-2">Talla</p>
-                <div id="tallas" class="flex gap-2.5 mb-6">
-                    <button class="talla-btn w-12 h-12 rounded-lg border-2 border-white/30 font-bold hover:border-brand-green" data-talla="S">S</button>
-                    <button class="talla-btn w-12 h-12 rounded-lg border-2 border-white/30 font-bold hover:border-brand-green" data-talla="M">M</button>
-                    <button class="talla-btn w-12 h-12 rounded-lg border-2 border-white/30 font-bold hover:border-brand-green" data-talla="L">L</button>
-                    <button class="talla-btn w-12 h-12 rounded-lg border-2 border-white/30 font-bold hover:border-brand-green" data-talla="XL">XL</button>
-                </div>
-
-                <!--agregar -->
-                <div class="flex gap-3 items-stretch">
-                    
-                    <button id="btnAgregar" class="flex-1 bg-brand-blue text-brand-text font-bold uppercase py-3.5 rounded-lg hover:opacity-90">
-                        Agregar al carrito
-                    </button>
-                </div>
-                <a id="btnComprarYa" href="pago.html" class="block text-center mt-3 bg-brand-green text-brand-bg font-bold uppercase py-3.5 rounded-lg hover:opacity-90">
-                    Comprar ahora
+            <div class="flex items-center gap-3">
+                <a href="tienda.html" class="bg-brand-green text-brand-bg font-bold uppercase text-sm tracking-wide px-5 py-3 rounded-lg hover:opacity-90">
+                    <i class="fas fa-store mr-2"></i>Volver a la tienda
                 </a>
-                <p id="avisoTalla" class="text-sm mt-3"></p>
+                <button id="btnCerrar" class="border border-white/20 text-sm font-bold px-5 py-3 rounded-lg hover:border-brand-noti hover:text-brand-noti">
+                    Cerrar sesión
+                </button>
             </div>
+        </div>
+
+        <p id="estadoPanel" class="text-white/50 text-sm mb-6">Cargando estadísticas&hellip;</p>
+
+        <!-- Indicadores (KPIs) -->
+        <div id="kpis" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10"></div>
+
+        <!-- Gráficas -->
+        <div class="grid lg:grid-cols-2 gap-8">
+            <section class="bg-brand-card rounded-xl p-6">
+                <h2 class="font-bold text-lg mb-4">Productos más vendidos</h2>
+                <ul id="topProductos" class="space-y-4"></ul>
+            </section>
+            <section class="bg-brand-card rounded-xl p-6">
+                <h2 class="font-bold text-lg mb-4">Ventas por categoría</h2>
+                <ul id="ventasCategoria" class="space-y-4"></ul>
+            </section>
         </div>
     </main>
 
@@ -105,6 +98,6 @@
     <script src="../js/nav.js"></script>
     <script src="../js/carrito.js"></script>
     <script src="../js/auth.js"></script>
-    <script src="../js/producto.js"></script>
+    <script src="../js/admin.js"></script>
 </body>
 </html>
